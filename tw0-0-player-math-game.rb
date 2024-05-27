@@ -1,13 +1,13 @@
 # Player - represent each player. Stores player state such as their name, number of
 # lives, and scores.
 class Player 
-  def initalize(name, score, lives = 3)
+  def initialize(name, lives = 3)
     @name = name
     @lives = lives
     @score = 0
   end
 
-  attr_accessor :name, :lives
+  attr_accessor :name, :lives, :score
 
   def lose_life
     @lives -= 1
@@ -25,9 +25,11 @@ end
 # The Question class is responsible for generating new math problems for the players to solve. 
 # It stores the two numbers involved in the problem and can calculate the correct answer.
 class Question
-  def initalize(num1, num2)
+  def initialize
     generate_num
   end
+
+  attr_accessor :num1, :num2
 
   def generate_num # Generates random numbers between 1 and 20
     @num1 = rand(1..20) 
@@ -43,9 +45,9 @@ end
 # checking answers, and determining when the game ends. It switches between players, 
 # checks their answers, and announces the winner when the game ends.
 class Game 
-  def initalize(player1, player2, current_player)
-    @player1 = Player.new("Player1")
-    @player2 = Player.new("player2")
+  def initialize(player1, player2)
+    @player1 = Player.new(player1)
+    @player2 = Player.new(player2)
     @current_player = @player1
   end
 
@@ -53,8 +55,8 @@ class Game
 
   def start 
     while @player1.is_alive && @player2.is_alive
-      Question = Question.new
-      puts "#{@correct_answer.name}, What is #{question.num1} + #{question.num2}?"
+      question = Question.new
+      puts "#{@current_player.name}, What is #{question.num1} + #{question.num2}?"
       answer = gets.chomp.to_i # Gets the user input and converts it to an number
 
       if check_answer(answer, question.correct_answer)
@@ -92,6 +94,6 @@ class Game
       puts "Game over! #{@player2.name} wins with #{@player2.score} correct answers and #{@player2.lives} lives remaining."
     elsif !@player2.is_alive
       puts "Game over! #{@player1.name} wins with #{@player1.score} correct answers and #{@player1.lives} lives remaining."
+    end
   end
-
 end
