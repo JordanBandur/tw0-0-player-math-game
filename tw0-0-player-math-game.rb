@@ -17,3 +17,17 @@ class Player
   end
 end
 
+class Question
+  def initalize(num1, num2)
+    generate_num
+  end
+
+  def generate_num
+    @num1 = rand(1..20)
+    @num2 = rand(1..20)
+  end
+
+  def correct_answer
+    @num1 + @num2
+  end
+end
