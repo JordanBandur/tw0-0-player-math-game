@@ -1,6 +1,4 @@
-require_relative 'player'
-require_relative 'question'
-require_relative 'game'
+require_relative 'tw0-0-player-math-game'
 
 puts "Enter the name of Player 1:"
 player1_name = gets.chomp
